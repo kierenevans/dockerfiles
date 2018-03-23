@@ -35,6 +35,7 @@ function do_assets_all()
   do_assets_download
   do_assets_apply
 }
+export -f do_assets_all
 
 function assets_list()
 {
@@ -117,7 +118,7 @@ function assets_apply_database_mysql()
   if [ "${DATABASE_EXISTS}" -ne 0 ]; then
     mapfile -t DATABASE_TABLES < <(mysql "${DATABASE_ARGS[@]}" "${APPLY_DATABASE_NAME}" -e "SHOW TABLES" | tail --lines=+2)
   fi
-  
+
 
   if [ "${DATABASE_EXISTS}" -ne 0 ] && [ "${APPLY_FORCE_DATABASE_DROP}" == 'true' ]; then
     echo "Dropping the ${APPLY_DATABASE_NAME} MySql database"
